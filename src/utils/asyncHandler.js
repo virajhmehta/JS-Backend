@@ -1,12 +1,12 @@
 // promise utility
-const asyncHandler = () => {
-    (req, res, next) => {
-        Promise.resolve().catch((error) => next(error)).
-        catch((error) => next(error))
+const asyncHandler = (requestHandler) => {
+    return (req, res, next) => {
+        Promise.resolve(requestHandler(req, res, next))
+        .catch((error) => next(error))
     }
 }
 
-export {asyncHandler}
+export  default asyncHandler
 
 
 // const asyncHandler = () => {}
