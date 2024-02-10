@@ -16,7 +16,7 @@ app.use(express.json({limit:"16kb"}))
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
 
 app.use(express.static("public"))
-app.use(cookieParser())
+app.use(cookieParser()) // we can access cookie in userController
 
 //routes import // standard way of routing
 
