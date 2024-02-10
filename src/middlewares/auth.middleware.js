@@ -1,16 +1,15 @@
-import ApiError from "../utils/ApiError";
-import asyncHandler from "../utils/asyncHandler";
+import ApiError from "../utils/ApiError.js";
+import asyncHandler from "../utils/asyncHandler.js";
 import  jwt  from "jsonwebtoken";
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 
 
 // This middleware will verify is the user correct or not
 // if res is not getting used sometime in prod grad we also use _
-export const verifyJWT = asyncHandler(async(req, res, next) => {
+export const verifyJWT = asyncHandler(async(req, _, next) => {
     // using cookie access
     try {
-        const token = req.cookie?.accessToken 
-        || req.header("Authorization")?.replace("Bearer ", "")
+        const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
     
         if(!token){
             throw new ApiError(401, "Unathorized request")
